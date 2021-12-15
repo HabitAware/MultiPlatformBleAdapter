@@ -403,6 +403,8 @@ public class BleClientManager : NSObject {
             connectionObservable = connectionObservable.timeout(Double(timeout) / 1000.0, scheduler: ConcurrentDispatchQueueScheduler(queue: queue))
         }
 
+        connectingPeripherals.removeDisposable(deviceId)
+
         let connectionDisposable = connectionObservable
             .do(onSubscribe: { [weak self] in
                 self?.dispatchEvent(BleEvent.connectingEvent, value: deviceId.uuidString)

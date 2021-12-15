@@ -1367,6 +1367,8 @@ public class BleModule implements BleAdapter {
             );
         }
 
+        connectingDevices.removeDisposable(device.getMacAddress());
+
         final DisposableObserver<RxBleConnection> observer = new DisposableObserver<RxBleConnection>() {
             @Override
             public void onComplete() {
